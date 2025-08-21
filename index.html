@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Biblioteca • Projeto Integrador (PUC-Campinas)</title>
+
+    <!-- =========================
+         ESTILO (PUC Azul + Branco)
+         ========================= -->
+    <style>
+      :root{
+        /* Paleta inspirada PUC-Campinas */
+        --blue-900:#0A2A6B;
+        --blue-700:#1141A3;
+        --blue-500:#2B6FFF;
+        --blue-100:#EAF2FF;
+        --ink-900:#0B1221;
+        --ink-700:#1F2937;
+        --ink-600:#475569;
+        --bg:#FFFFFF;
+        --radius:18px;
+        --shadow:0 10px 30px rgba(16,40,120,.15);
+      }
+
+      /* Reset básico */
+      *{box-sizing:border-box}
+      html,body{margin:0; padding:0;}
+      body{
+        font-family: "Segoe UI", Roboto, system-ui, -apple-system, Arial, sans-serif;
+        background: var(--bg);
+        color: var(--ink-900);
+      }
+      img{max-width:100%; display:block;}
+
+      /* =========================
+         NAVBAR
+         ========================= */
+      .navbar{
+        position: sticky; top:0; z-index: 50;
+        display:flex; align-items:center; justify-content:space-between;
+        padding: 16px clamp(16px, 4vw, 40px);
+        background:#fff;
+        border-bottom:1px solid #EEF2F6;
+      }
+      .brand__title{
+        font-weight:800; letter-spacing:.2px;
+        color:var(--ink-900);
+        font-size: clamp(1.05rem, 2vw, 1.25rem);
+      }
+      .nav-links{
+        list-style:none; display:flex; gap:28px; margin:0; padding:0;
+      }
+      .nav-links a{
+        text-decoration:none; color:var(--ink-900); font-weight:600;
+      }
+      .nav-links a:hover{ color:var(--blue-700); }
+
+      /* Hamburguer */
+      .hamburger{
+        display:none; background:none; border:0; padding:6px; margin-left:12px; cursor:pointer;
+      }
+      .hamburger span{display:block; width:26px; height:2px; background:#111; margin:5px 0; transition:.3s}
+
+      /* Menu mobile fechado por padrão */
+      .mobile-menu{ display:none; }
+      .mobile-menu.open{ display:block; }
+      .mobile-menu .menu-links{
+        list-style:none; margin:0; padding:14px 22px 22px;
+        background:#fff; border-bottom:1px solid #e5e7eb;
+      }
+      .mobile-menu .menu-links li{ padding:10px 0; }
+      .mobile-menu .menu-links a{
+        color:var(--ink-900); text-decoration:none; font-weight:600;
+      }
+
+      /* =========================
+         HERO (capa)
+         ========================= */
+      .hero{
+  position:relative;
+  display:grid;
+  grid-template-columns: 1.1fr .9fr;
+  gap:48px;
+  align-items:center;
+
+  /* ocupa a tela toda */
+  min-height: 100vh;
+  padding: clamp(32px, 6vw, 64px) clamp(16px, 4vw, 56px);
+
+  /* fundo: imagem + véu azul para leitura */
+  background:
+    linear-gradient(180deg, rgba(234,242,255,0.60) 0%, rgba(234,242,255,1) 100%),
+    url("./assets/biblioteca.png") center/cover no-repeat;
+}
+      .hero__content{ max-width:720px; }
+      .hero__kicker{
+        color:var(--blue-700); font-weight:800; letter-spacing:.02em;
+        margin:0 0 8px;
+      }
+      .hero__title{
+        font-size: clamp(2rem, 5vw, 3rem);
+        line-height:1.1; margin:0 0 12px; color:var(--ink-900);
+      }
+      .hero__subtitle{
+        color:var(--ink-600); font-size:1.065rem; margin: 0 0 22px;
+      }
+      .hero__cta{ display:flex; gap:10px; flex-wrap:wrap; }
+      .btn{
+        display:inline-block; padding:12px 18px; border-radius:999px; font-weight:800;
+        text-decoration:none; transition:.25s; border:2px solid transparent;
+      }
+      .btn-primary{ background:var(--blue-700); color:#fff; border-color:var(--blue-700); }
+      .btn-primary:hover{ background:var(--blue-900); border-color:var(--blue-900); }
+      .btn-ghost{ background:#fff; color:var(--blue-700); border-color:var(--blue-700); }
+      .btn-ghost:hover{ background:var(--blue-100); }
+      .hero__media{ display:flex; justify-content:center; align-items:center; }
+      .hero__media img{
+  width: min(460px, 85%);
+  max-height: 460px;
+  object-fit: contain;     /* preserva proporção do logo */
+  border-radius: 0;        /* tira formato circular */
+  border: 0;               /* sem borda branca */
+  box-shadow: var(--shadow);
+  background: transparent; /* garante fundo limpo */
+}
+
+      .hero__wave{
+        position:absolute; inset:auto 0 0 0; height:80px; pointer-events:none;
+        background: linear-gradient(180deg, rgba(17,65,163,0) 0%, rgba(17,65,163,.07) 100%);
+        clip-path: path("M0,50 C250,120 450,-10 1000,60 L1000,100 L0,100 Z");
+      }
+
+      /* =========================
+         SEÇÕES PADRÃO
+         ========================= */
+      section.section{ padding: clamp(32px, 6vw, 64px) clamp(16px, 4vw, 56px); }
+      .title{ font-size: clamp(1.6rem, 3.6vw, 2.2rem); margin: 0 0 8px; color:var(--ink-900); }
+      .section__text__p1{ color:var(--blue-700); font-weight:800; margin:0 0 2px; }
+
+      /* Grid de recursos (opcional p/ projetos) */
+      .feature-grid{
+        display:grid; gap:16px;
+        grid-template-columns: repeat(12, 1fr);
+        margin-top:16px;
+      }
+      .feature-card{
+        grid-column: span 6;
+        background:#fff; border:1px solid #EEF2F6; border-radius:var(--radius);
+        padding:16px 16px; box-shadow: var(--shadow);
+      }
+      .feature-card h4{ margin:0 0 6px; color:var(--blue-700); }
+      .feature-card p{ margin:0; color:var(--ink-700); }
+
+      /* Contato */
+      .contact-info-upper-container{
+        display:flex; gap:24px; flex-wrap:wrap;
+      }
+      .contact-info-container{
+        display:flex; align-items:center; gap:10px;
+        background:#fff; border:1px solid #EEF2F6; border-radius:var(--radius);
+        padding:12px 16px; box-shadow: var(--shadow);
+      }
+      .contact-info-container a{ color:var(--blue-700); text-decoration:none; font-weight:700; }
+
+      /* Footer */
+      footer{
+        margin-top:24px; text-align:center; padding:18px 16px;
+        background: var(--blue-700); color:#fff;
+      }
+
+      /* =========================
+         RESPONSIVO
+         ========================= */
+      @media (max-width: 980px){
+        .nav-links{ display:none; }
+        .hamburger{ display:block; }
+        .mobile-menu .menu-links{ padding:14px 22px 22px; }
+
+
+        
+        .hero{
+          grid-template-columns: 1fr;
+          text-align:center; gap:20px;
+        }
+        .hero__cta{ justify-content:center; }
+        .hero__media img{ width: 240px; }
+        .feature-card{ grid-column: span 12; }
+      }
+    </style>
+  </head>
+
+  <body>
+   
+    <nav id="desktop-nav" class="navbar">
+      <div class="brand">
+        <span class="brand__title">Sistema de Gestão de Biblioteca Universitária</span>
+      </div>
+      <ul class="nav-links">
+        <li><a href="#about">Programa do Aluno</a></li>
+        <li><a href="#experience">Terminal de Autoatendimento</a></li>
+        <li><a href="#projects">Programa do Bibliotecário</a></li>
+        <li><a href="#contact">Contato</a></li>
+      </ul>
+      <button class="hamburger" aria-label="Abrir menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+
+    <nav id="hamburger-nav" class="mobile-menu">
+      <ul class="menu-links">
+        <li><a href="#about">Programa do Aluno</a></li>
+        <li><a href="#experience">Terminal de Autoatendimento</a></li>
+        <li><a href="#projects">Programa do Bibliotecário</a></li>
+        <li><a href="#contact">Contato</a></li>
+      </ul>
+    </nav>
+
+    <!-- =========================
+         HERO (CAPA)
+         ========================= -->
+    <section id="profile" class="hero">
+      <div class="hero__content">
+        <p class="hero__kicker">Projeto Integrador • PUC-Campinas</p>
+        <h1 class="hero__title">Sistema de Gestão de Biblioteca</h1>
+        <p class="hero__subtitle">
+          Plataforma moderna com módulos para Alunos, Autoatendimento e Bibliotecários.
+        </p>
+
+        <div class="hero__cta">
+          <a href="#about" class="btn btn-primary">Programa do Aluno</a>
+          <a href="#experience" class="btn btn-ghost">Autoatendimento</a>
+          <a href="#projects" class="btn btn-ghost">Bibliotecário</a>
+        </div>
+      </div>
+
+      <div class="hero__media">
+        <img src="./assets/Fundo de capa (1).png" alt="Imagem do projeto" />
+      </div>
+
+      <div class="hero__wave" aria-hidden="true"></div>
+    </section>
+
+    <!-- =========================
+         SEÇÃO: PROGRAMA DO ALUNO
+         ========================= -->
+    <section id="about" class="section" aria-labelledby="titulo-aluno">
+      <p class="section__text__p1">Módulo do Estudante</p>
+      <h2 id="titulo-aluno" class="title">Programa do Aluno</h2>
+
+      <div class="feature-grid">
+        <article class="feature-card">
+          <h4>Cadastro de aluno</h4>
+          <p>Cadastro direto no portal do aluno para acesso aos serviços da biblioteca.</p>
+        </article>
+        <article class="feature-card">
+          <h4>Consulta de livros</h4>
+          <p>Busca de livros disponíveis para empréstimo com status e prazos.</p>
+        </article>
+        <article class="feature-card">
+          <h4>Pontuação do leitor</h4>
+          <p>Visualize sua pontuação no semestre com classificação automática.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- =========================
+         SEÇÃO: TOTEM (AUTOATENDIMENTO)
+         ========================= -->
+    <section id="experience" class="section" aria-labelledby="titulo-totem">
+      <p class="section__text__p1">Autoatendimento</p>
+      <h2 id="titulo-totem" class="title">Terminal de Autoatendimento</h2>
+
+      <div class="feature-grid">
+        <article class="feature-card">
+          <h4>Retirada de livros</h4>
+          <p>O aluno informa seu identificador no totem e confirma a retirada. Data/hora registradas.</p>
+        </article>
+        <article class="feature-card">
+          <h4>Devolução de livros</h4>
+          <p>Fluxo semelhante à retirada, registrando data/hora no banco de dados.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- =========================
+         SEÇÃO: PROGRAMA DO BIBLIOTECÁRIO
+         ========================= -->
+    <section id="projects" class="section" aria-labelledby="titulo-biblio">
+      <p class="section__text__p1">Gestão Acadêmica</p>
+      <h2 id="titulo-biblio" class="title">Programa do Bibliotecário</h2>
+
+      <div class="feature-grid">
+        <article class="feature-card">
+          <h4>Cadastro de livros</h4>
+          <p>Registro de novas obras: título, autor, editora, ISBN, categorias e quantidade.</p>
+        </article>
+        <article class="feature-card">
+          <h4>Gerenciamento de acervo</h4>
+          <p>Lista completa, visão de emprestados/pendentes e histórico de operações.</p>
+        </article>
+        <article class="feature-card">
+          <h4>Relatórios de classificação</h4>
+          <p>Ranking do semestre com base na tabela de pontuação de leitores.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- =========================
+         CONTATO
+         ========================= -->
+    <section id="contact" class="section" aria-labelledby="titulo-contato">
+      <p class="section__text__p1">Fale com a equipe</p>
+      <h2 id="titulo-contato" class="title">Contato</h2>
+
+      <div class="contact-info-upper-container">
+        <div class="contact-info-container">
+          <img src="./assets/email.png" alt="Email" width="20" height="20" />
+          <p><a href="mailto:examplemail@gmail.com">examplemail@gmail.com</a></p>
+        </div>
+        <div class="contact-info-container">
+          <img src="./assets/linkedin.png" alt="LinkedIn" width="20" height="20" />
+          <p><a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a></p>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <p><small>© 2025 Projeto Integrador • Sistema de Biblioteca — PUC-Campinas</small></p>
+    </footer>
+
+   
+    <script>
+      const hamburgerBtn = document.querySelector('.hamburger');
+      const mobileMenu = document.querySelector('#hamburger-nav');
+      if (hamburgerBtn) {
+        hamburgerBtn.addEventListener('click', () => {
+          const open = mobileMenu.classList.toggle('open');
+          hamburgerBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        });
+      }
+
+      // Scroll suave para âncoras internas
+      document.querySelectorAll('a[href^="#"]').forEach(a => {
+        a.addEventListener('click', e => {
+          const id = a.getAttribute('href');
+          const el = document.querySelector(id);
+          if (el) {
+            e.preventDefault();
+            el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          
+            if (mobileMenu.classList.contains('open')) {
+              mobileMenu.classList.remove('open');
+              hamburgerBtn.setAttribute('aria-expanded','false');
+            }
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
