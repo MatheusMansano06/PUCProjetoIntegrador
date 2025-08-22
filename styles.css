@@ -1,1 +1,133 @@
-/* styles consolidated here */
+:root{
+  /* Aqui eu defino as cores e estilos que vou usar em várias partes do site */
+  --blue-900:#0A2A6B;  /* Azul mais escuro */
+  --blue-700:#1141A3;  /* Azul médio */
+  --blue-500:#2B6FFF;  /* Azul claro principal */
+  --blue-100:#EAF2FF;  /* Azul bem clarinho para fundo */
+  --ink-900:#0B1221;   /* Preto quase puro para textos */
+  --ink-700:#1F2937;   /* Cinza escuro */
+  --ink-600:#475569;   /* Cinza médio */
+  --bg:#FFFFFF;        /* Fundo branco */
+  --radius:18px;       /* Bordas arredondadas */
+  --shadow:0 10px 30px rgba(16,40,120,.15); /* Sombra padrão */
+}
+
+/* Reset básico para evitar diferença entre navegadores */
+*{ box-sizing:border-box }
+html,body{ margin:0; padding:0; }
+
+body{
+  font-family: "Segoe UI", Roboto, system-ui, -apple-system, Arial, sans-serif; /* Fonte do site */
+  background: var(--bg);   /* Fundo branco */
+  color: var(--ink-900);   /* Texto preto */
+}
+
+img{ max-width:100%; display:block; } /* Todas as imagens ocupam o tamanho máximo do container */
+
+/* ===== NAVBAR (menu do topo) ===== */
+.navbar{
+  position: sticky; top:0; z-index: 50; /* Navbar sempre fixa no topo */
+  display:flex; align-items:center; justify-content:space-between; /* Itens alinhados */
+  padding: 16px clamp(16px, 4vw, 40px); /* Espaçamento responsivo */
+  background:#fff; border-bottom:1px solid #EEF2F6; /* Fundo branco com linha embaixo */
+}
+
+.brand__title{ 
+  font-weight:800; /* Deixo o nome em negrito */
+  letter-spacing:.2px; /* Espaço entre letras */
+  color:var(--ink-900); /* Cor preta */
+  font-size: clamp(1.05rem, 2vw, 1.25rem); /* Tamanho que adapta à tela */
+}
+
+.nav-links{ list-style:none; display:flex; gap:28px; margin:0; padding:0; } /* Links lado a lado */
+.nav-links a{ text-decoration:none; color:var(--ink-900); font-weight:600; } /* Links pretos */
+.nav-links a:hover{ color:var(--blue-700); } /* Links ficam azuis ao passar o mouse */
+
+/* Botão hambúrguer (menu mobile) */
+.hamburger{ display:none; background:none; border:0; padding:6px; margin-left:12px; cursor:pointer; }
+.hamburger span{ display:block; width:26px; height:2px; background:#111; margin:5px 0; transition:.3s }
+
+/* ===== MENU MOBILE ===== */
+.mobile-menu{ display:none; } /* Escondido por padrão */
+.mobile-menu.open{ display:block; } /* Quando aberto aparece */
+.mobile-menu .menu-links{
+  list-style:none; margin:0; padding:14px 22px 22px;
+  background:#fff; border-bottom:1px solid #e5e7eb;
+}
+.mobile-menu .menu-links li{ padding:10px 0; } /* Espaço entre links */
+.mobile-menu .menu-links a{ color:var(--ink-900); text-decoration:none; font-weight:600; }
+
+/* ===== CAPA  ===== */
+.capa{
+  position:relative;
+  display:grid; /* Grid para dividir texto e imagem */
+  grid-template-columns: 1.1fr .9fr; /* Lado esquerdo maior que direito */
+  gap:48px;
+  align-items:center;
+  min-height: 100vh; /* Ocupa a tela inteira */
+  padding: clamp(32px, 6vw, 64px) clamp(16px, 4vw, 56px);
+  background:
+    linear-gradient(180deg, rgba(234,242,255,0.60) 0%, rgba(234,242,255,1) 100%), /* Degradê */
+    url("./assets/biblioteca.png") center/cover no-repeat; /* Imagem de fundo */
+}
+
+.capa__conteudo{ max-width:720px; } /* Limito a largura do texto */
+.capa__chamada{ color:var(--blue-700); font-weight:800; margin:0 0 8px; } /* Texto pequeno acima do título */
+.capa__titulo{ font-size: clamp(2rem, 5vw, 3rem); line-height:1.1; margin:0 0 12px; color:var(--ink-900); }
+.capa__subtitulo{ color:var(--ink-600); font-size:1.065rem; margin: 0 0 22px; }
+
+.capa__botoes{ display:flex; gap:10px; flex-wrap:wrap; } /* Botões lado a lado */
+
+/* Estilos dos botões */
+.btn{ display:inline-block; padding:12px 18px; border-radius:999px; font-weight:800; text-decoration:none; transition:.25s; border:2px solid transparent; }
+.btn-primary{ background:var(--blue-700); color:#fff; border-color:var(--blue-700); }
+.btn-primary:hover{ background:var(--blue-900); border-color:var(--blue-900); }
+.btn-ghost{ background:#fff; color:var(--blue-700); border-color:var(--blue-700); }
+.btn-ghost:hover{ background:var(--blue-100); }
+
+.capa__imagem{ display:flex; justify-content:center; align-items:center; } /* Centralizo a imagem */
+.capa__imagem img{
+  width: min(460px, 85%);
+  max-height: 460px;
+  object-fit: contain; /* Imagem proporcional */
+  border-radius: 0;
+  border: 0;
+  box-shadow: var(--shadow); /* Sombra */
+  background: transparent;
+}
+
+.capa__efeito{
+  position:absolute; inset:auto 0 0 0; height:80px; pointer-events:none;
+  background: linear-gradient(180deg, rgba(17,65,163,0) 0%, rgba(17,65,163,.07) 100%);
+  clip-path: path("M0,50 C250,120 450,-10 1000,60 L1000,100 L0,100 Z"); /* Onda decorativa */
+}
+
+/* ===== SEÇÕES PADRÃO ===== */
+section.section{ padding: clamp(32px, 6vw, 64px) clamp(16px, 4vw, 56px); } /* Espaçamento padrão */
+.title{ font-size: clamp(1.6rem, 3.6vw, 2.2rem); margin: 0 0 8px; color:var(--ink-900); }
+.section__text__p1{ color:var(--blue-700); font-weight:800; margin:0 0 2px; }
+
+.feature-grid{ display:grid; gap:16px; grid-template-columns: repeat(12, 1fr); margin-top:16px; }
+.feature-card{ grid-column: span 6; background:#fff; border:1px solid #EEF2F6; border-radius:var(--radius); padding:16px 16px; box-shadow: var(--shadow); }
+.feature-card h4{ margin:0 0 6px; color:var(--blue-700); }
+.feature-card p{ margin:0; color:var(--ink-700); }
+
+/* ===== CONTATO ===== */
+.contact-info-upper-container{ display:flex; gap:24px; flex-wrap:wrap; } /* Container flexível */
+.contact-info-container{ display:flex; align-items:center; gap:10px; background:#fff; border:1px solid #EEF2F6; border-radius:var(--radius); padding:12px 16px; box-shadow: var(--shadow); }
+.contact-info-container a{ color:var(--blue-700); text-decoration:none; font-weight:700; }
+
+/* ===== RODAPÉ ===== */
+footer{ margin-top:24px; text-align:center; padding:18px 16px; background: var(--blue-700); color:#fff; }
+
+/* ===== RESPONSIVIDADE (quando a tela for menor que 980px) ===== */
+@media (max-width: 980px){
+  .nav-links{ display:none; } /* Escondo os links grandes */
+  .hamburger{ display:block; } /* Mostro o botão hambúrguer */
+  .mobile-menu .menu-links{ padding:14px 22px 22px; }
+
+  .capa{ grid-template-columns: 1fr; text-align:center; gap:20px; } /* Capa em uma coluna só */
+  .capa__botoes{ justify-content:center; } /* Botões centralizados */
+  .capa__imagem img{ width: 240px; } /* Imagem menor no celular */
+  .feature-card{ grid-column: span 12; } /* Cards ocupam largura toda */
+}
