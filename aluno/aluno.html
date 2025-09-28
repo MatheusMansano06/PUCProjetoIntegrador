@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cadastro de Aluno • Biblioteca</title>
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="./aluno.css" />
+</head>
+<body>
+  <!-- Hero -->
+  <header class="hero">
+    <div class="hero__overlay"></div>
+    <div class="hero__content">
+      <div class="hero__topbar">
+        <a href="../index.html#about" class="btn btn-ghost">← Voltar</a>
+      </div>
+      <h1>Cadastro de Aluno</h1>
+      <p>Sistema de Gestão de Biblioteca Universitária</p>
+    </div>
+  </header>
+
+  <!-- Conteúdo -->
+  <main class="container">
+    <section class="card">
+      <form id="form-aluno" class="form">
+  <div class="grid">
+    <label>
+      Nome completo *
+      <input id="nome" name="nome" required placeholder="Ex: Nome " />
+    </label>
+
+    <label>
+      RA / Matrícula *
+      <input id="ra" name="ra" required pattern="\d{3,}" title="Somente números (mín. 3)" placeholder="Ex: 25021808" />
+    </label>
+
+    <label>
+      Curso *
+      <input id="curso" name="curso" required placeholder="Ex: Sistemas de Informação" />
+    </label>
+
+    <label>
+      Período *
+      <select id="periodo" name="periodo" required>
+        <option value="">Selecione...</option>
+        <option>Matutino</option>
+        <option>Vespertino</option>
+        <option>Noturno</option>
+      </select>
+    </label>
+
+    <label>
+      E-mail *
+      <input id="email" name="email" type="email" required placeholder="Ex: email.institucional@puccampinas.edu.br" />
+    </label>
+
+    <label>
+      Telefone
+      <input id="telefone" name="telefone" placeholder="Ex: (19) 99999-9999" />
+    </label>
+  </div>
+
+  <div class="actions">
+    <button type="reset" class="btn">Limpar</button>
+    <button type="submit" class="btn btn-primary">Salvar</button>
+  </div>
+</form>
+
+    </section>
+
+    <section class="card">
+      <h3 class="section-title">Alunos cadastrados</h3>
+      <table id="tabela" class="table table--striped">
+        <thead>
+          <tr><th>RA</th><th>Nome</th><th>Curso</th><th>Período</th><th>Email</th></tr>
+        </thead>
+        <tbody>
+          <tr><td colspan="5" class="muted">Sem registros.</td></tr>
+        </tbody>
+      </table>
+
+      <div class="actions actions--left">
+    
+        <button id="limpar-db" class="btn btn-danger">Apagar tudo</button>
+      </div>
+    </section>
+  </main>
+
+  <script src="./aluno.js"></script>
+</body>
+</html>

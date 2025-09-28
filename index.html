@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="./styles.css" />
+    <title>Biblioteca • Projeto Integrador (PUC-Campinas)</title>
+  </head>
+
+  <body>
+    <!-- Cabeçalho da biblioteca -->
+    <nav id="desktop-nav" class="navbar">
+      <div class="brand">
+        <span class="brand__title">Sistema de Gestão de Biblioteca Universitária</span>
+      </div>
+      <ul class="nav-links">
+        <li><a href="#about">Programa do Aluno</a></li>
+        <li><a href="#experience">Terminal de Autoatendimento</a></li>
+        <li><a href="#projects">Programa do Bibliotecário</a></li>
+        <li><a href="#contact">Contato</a></li>
+      </ul>
+      <button class="hamburger" aria-label="Abrir menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+
+    <!-- Menu lateral (mobile) -->
+    <nav id="hamburger-nav" class="mobile-menu">
+      <ul class="menu-links">
+        <li><a href="#about">Programa do Aluno</a></li>
+        <li><a href="#experience">Terminal de Autoatendimento</a></li>
+        <li><a href="#projects">Programa do Bibliotecário</a></li>
+        <li><a href="#contact">Contato</a></li>
+      </ul>
+    </nav>
+
+    <!-- CAPA -->
+    <section id="capa" class="capa">
+      <div class="capa__conteudo">
+        <p class="capa__chamada">Projeto Integrador • PUC-Campinas</p>
+        <h1 class="capa__titulo">Sistema de Gestão de Biblioteca</h1>
+        <p class="capa__subtitulo">
+          Plataforma moderna com módulos para Alunos, Autoatendimento e Bibliotecários.
+        </p>
+
+        <div class="capa__botoes">
+          <a href="#about" class="btn btn-primary">Programa do Aluno</a>
+          <a href="#experience" class="btn btn-ghost">Autoatendimento</a>
+          <a href="#projects" class="btn btn-ghost">Bibliotecário</a>
+        </div>
+      </div>
+
+      <div class="capa__imagem">
+        <img src="./assets/Fundo de capa (1).png" alt="Imagem do projeto" />
+      </div>
+
+      <div class="capa__efeito" aria-hidden="true"></div>
+    </section>
+
+    <!-- Programa do Aluno -->
+<section id="about" class="section" aria-labelledby="titulo-aluno">
+  <p class="section__text__p1">Módulo do Estudante</p>
+  <h2 id="titulo-aluno" class="title">Programa do Aluno</h2>
+
+  <div class="feature-grid">
+    <article class="feature-card">
+      <h4>Cadastro de aluno</h4>
+      <p>Cadastro direto no portal do aluno para acesso aos serviços da biblioteca.</p>
+    </br> 
+      <!-- Botão para abrir o site de cadastro -->
+      <a
+        href="./aluno/aluno.html"   
+        class="btn btn-primary"
+        target="_blank"              
+        rel="noopener noreferrer"
+      >
+        Cadastrar Aluno
+      </a>
+    </article>
+
+    <article class="feature-card">
+      <h4>Consulta de livros</h4>
+      <p>Busca de livros disponíveis para empréstimo com status e prazos.</p>
+    </article>
+
+    <article class="feature-card">
+      <h4>Pontuação do leitor</h4>
+      <p>Visualize sua pontuação no semestre com classificação automática.</p>
+    </article>
+  </div>
+</section>
+
+    <!-- Terminal de Autoatendimento -->
+    <section id="experience" class="section" aria-labelledby="titulo-totem">
+      <p class="section__text__p1">Autoatendimento</p>
+      <h2 id="titulo-totem" class="title">Terminal de Autoatendimento</h2>
+
+      <div class="feature-grid">
+        <article class="feature-card">
+          <h4>Retirada de livros</h4>
+          <p>O aluno informa seu identificador no totem e confirma a retirada. Data/hora registradas.</p>
+        </article>
+        <article class="feature-card">
+          <h4>Devolução de livros</h4>
+          <p>Fluxo semelhante à retirada, registrando data/hora no banco de dados.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Programa do Bibliotecário -->
+    <section id="projects" class="section" aria-labelledby="titulo-biblio">
+      <p class="section__text__p1">Gestão Acadêmica</p>
+      <h2 id="titulo-biblio" class="title">Programa do Bibliotecário</h2>
+
+      <div class="feature-grid">
+        <article class="feature-card">
+          <h4>Cadastro de livros</h4>
+          <p>Registro de novas obras: título, autor, editora, ISBN, categorias e quantidade.</p>
+        </article>
+        <article class="feature-card">
+          <h4>Gerenciamento de acervo</h4>
+          <p>Lista completa, visão de emprestados/pendentes e histórico de operações.</p>
+        </article>
+        <article class="feature-card">
+          <h4>Relatórios de classificação</h4>
+          <p>Ranking do semestre com base na tabela de pontuação de leitores.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Contato -->
+    <section id="contact" class="section" aria-labelledby="titulo-contato">
+      <p class="section__text__p1">Fale com a equipe</p>
+      <h2 id="titulo-contato" class="title">Contato</h2>
+
+      <div class="contact-info-upper-container">
+        <div class="contact-info-container">
+          <img src="./assets/email.png" alt="Email" width="20" height="20" />
+          <p><a href="mailto:matheus.hm5@puccampinas.com">matheus.hm5@puccampinas.com</a></p>
+        </div>
+        <div class="contact-info-container">
+          <img src="./assets/linkedin.png" alt="LinkedIn" width="20" height="20" />
+          <p><a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a></p>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <p><small>© 2025 Projeto Integrador 2 • Sistema de Biblioteca — PUC-Campinas</small></p>
+    </footer>
+
+    <!-- Puxando o JS -->
+    <script src="./script.js" defer></script>
+  </body>
+</html>
